@@ -10,9 +10,9 @@ const ICONS = {
 };
 
 
-const HeaderLabel = ({ children = 'label', direction = 'default', sortable = false }) => {
+const HeaderLabel = ({ children = 'label', direction = 'default', priority = null,  sortable = false }) => {
   if(sortable) {
-   return (<div>{children} {ICONS[direction]} </div>)
+   return (<div>{children} {priority} {ICONS[direction]} </div>)
   }
   else
     return (<div>{children}</div>)
@@ -29,8 +29,12 @@ const addTransforms = (columns, handleSortingColumns, sortingColumns) => {
           (label, props) => ({
             onClick: (e) => props.column.sortable ?  handleSortingColumns(props.column.property, e.shiftKey)  : null, //this.sortColumn(props.column.property, e, rows)
             children: (
-              <HeaderLabel direction={sortingColumns[label] ? sortingColumns[label].direction : null} sortable={props.column.sortable} >
-                <div>{label}</div>
+              <HeaderLabel 
+                direction={sortingColumns[label] ? sortingColumns[label].direction : null}
+                priority = {sortingColumns[label] ? sortingColumns[label].priority : null}
+                sortable={props.column.sortable} 
+                >
+              {label}
               </HeaderLabel>
             )
           })

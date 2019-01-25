@@ -7,7 +7,8 @@ import {
 } from 'react-bootstrap';
 
 import {
-  getRoutePath
+  getRoutePath,
+  doSort
 } from 'CommonUtil/CommonUtil.js';
 
 import MyTable from 'MyTable/MyTable.js';
@@ -29,7 +30,6 @@ const columns = [
       label: 'name'
     },
     sortable: true,
-    priority: 3,
   },
   {
     property: 'family',
@@ -43,7 +43,6 @@ const columns = [
     header: {
       label: 'city'
     },
-    priority: 2,
     sortable: true
   },
   {
@@ -51,7 +50,6 @@ const columns = [
     header: {
       label: 'score',
     },
-    priority: 1,
     sortable: true
   }
 ];
@@ -64,24 +62,7 @@ const rows = [
   { id: 5, name: 'abraham', family: 'blue', city: 'darwin', score: 500 } 
 ];
 
-function doSort(items, property, direction) {
-  switch (direction) {
-    case 'asc':
-      return [
-        ...items.sort((a, b) => {
-          return a[property] > b[property] ? 1 : -1;
-        })
-      ];
-    case 'desc':
-      return [
-        ...items.sort((a, b) => {
-          return a[property] < b[property] ? 1 : -1;
-        })
-      ];
-    default:
-      return [...items];
-  }
-};
+
 
 const defaultSortingColumns = columns
   .filter(column => column.sortable)

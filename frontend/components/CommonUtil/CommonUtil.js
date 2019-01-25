@@ -110,6 +110,25 @@ function isEmpty(value) {
   return value === undefined || value === null;
 }
 
+function doSort(items, property, direction) {
+  switch (direction) {
+    case 'asc':
+      return [
+        ...items.sort((a, b) => {
+          return a[property] > b[property] ? 1 : -1;
+        })
+      ];
+    case 'desc':
+      return [
+        ...items.sort((a, b) => {
+          return a[property] < b[property] ? 1 : -1;
+        })
+      ];
+    default:
+      return [...items];
+  }
+};
+
 export {
   flatObject,
   isEmpty,
@@ -120,5 +139,6 @@ export {
   deleteJSON,
   trim,
   validatorRequired,
-  validatorAlphaNumeric
+  validatorAlphaNumeric,
+  doSort
 };
